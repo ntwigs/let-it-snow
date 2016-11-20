@@ -1,6 +1,10 @@
 const toggleSnow = () => {
-    var bkg = chrome.extension.getBackgroundPage();
-    bkg.console.log('Sent to background page');
+    chrome.storage.sync.get("snowToggle", function (obj) {
+        const toggle = obj.snowToggle ? false : true
+        chrome.storage.sync.set({'snowToggle': toggle}, function() {
+          sendResponse();
+        });
+    });
 }
 
 chrome.extension.sendMessage({}, function(response) {
