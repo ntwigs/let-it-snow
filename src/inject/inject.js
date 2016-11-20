@@ -16,7 +16,6 @@ chrome.extension.sendMessage({}, function(response) {
 					let sizeValue = (option.options.size / 10) || 0.15
 					let speedValue = (option.options.speed / 100) || 0.35
 
-
 					function generateFlakes() {
 						tabInFocus = setInterval(() => {
 							canvas.createSnowflake(speedValue, sizeValue)
@@ -42,18 +41,12 @@ chrome.extension.sendMessage({}, function(response) {
 
 class Snowflake {
     constructor(ctx, width, speed, size) {
-
-		//Values should be set with value / 100
         this.ctx = ctx
         this.right = Math.random() > 0.5 ? true : false
-
-		//Set size value here
         this.size = Math.floor(Math.random() * size) + 2
         this.x = Math.floor(Math.random() * width) + 1
         this.curve = 100
         this.y = -10
-
-		//Set speed value here
         this.speed = speed + (this.size / 50)
         this.opacity = (Math.random() * 1) + 0.25
     }
@@ -134,12 +127,17 @@ class CanvasHandler {
         snowflake.curve += 0.01
     }
 
+	lowerOpacity(snowflake) {
+		const lower = snowflake.y > this.canvas.height * 0.7 ? 0.03 : 0.002
+		snowflake.opacity -= lower
+	}
+
     update() {
         for (let i = 0; i < this.snowflakes.length; i++) {
             let snowflake = this.snowflakes[i]
             snowflake.y += snowflake.speed
             this.noise(snowflake)
-            snowflake.opacity -= 0.002
+			this.lowerOpacity(snowflake)
             this.removeSnowflakesOutOfCanvasOrInvisible(snowflake, i)
             snowflake.render()
         }
