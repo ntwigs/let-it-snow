@@ -1,43 +1,66 @@
-chrome.extension.sendMessage({}, function(response) {
-	var readyStateCheckInterval = setInterval(function() {
-	if (document.readyState === 'complete') {
-		clearInterval(readyStateCheckInterval)
-		chrome.storage.sync.get('snowToggle', function (obj) {
-    		if (obj.snowToggle) {
-				const canvas = new CanvasHandler()
-				canvas.initialize()
+class Inject {
+	constructor() {
+		this.tabInFocus = null
+		this.toggleFocus = true
+		this.amountValue = 250
+		this.sizeValue = 0.15
+		this.speedValue = 0.35
+		this.canvas = null
 
-				let tabInFocus
-				toggleFocus = true
-
-				chrome.storage.sync.get('options', function (option) {
-
-					let amountValue = (1000 - (option.options.amount - 1)) || 250
-					let sizeValue = (option.options.size / 10) || 0.15
-					let speedValue = (option.options.speed / 100) || 0.35
-
-					function generateFlakes() {
-						tabInFocus = setInterval(() => {
-							canvas.createSnowflake(speedValue, sizeValue)
-						}, amountValue)
+		chrome.extension.sendMessage({}, response => {
+			const readyStateCheckInterval = setInterval(() => {
+			if (document.readyState === 'complete') {
+				clearInterval(readyStateCheckInterval)
+				chrome.storage.sync.get('snowToggle', onOff => {
+		    		if (onOff.snowToggle) {
+						this.createCanvas()
+						this.setUserValues()
 					}
-
-					function stopFlakes() {
-						window.clearInterval(tabInFocus)
-					}
-
-					generateFlakes()
-					window.addEventListener('visibilitychange', () => {
-						toggleFocus = toggleFocus ? false : true
-						toggleFocus ? generateFlakes() : stopFlakes()
-					})
-
 				})
 			}
+			}, 10)
 		})
 	}
-	}, 10)
-})
+
+	setUserValues() {
+		chrome.storage.sync.get('options', option => {
+			if (option) {
+				this.amountValue = (1000 - (option.options.amount - 1))
+				this.sizeValue = (option.options.size / 10)
+				this.speedValue = (option.options.speed / 100)
+			}
+			this.correctTabListener()
+		})
+	}
+
+	createCanvas() {
+		this.canvas = new CanvasHandler()
+		this.canvas.initialize()
+	}
+
+	correctTabListener() {
+		this.generateFlakes()
+		window.addEventListener('visibilitychange', this.checkFocusAndGenerate.bind(this))
+	}
+
+	checkFocusAndGenerate() {
+		this.toggleFocus = this.toggleFocus ? false : true
+		this.toggleFocus ? this.generateFlakes() : this.stopFlakes()
+	}
+
+	generateFlakes() {
+		this.tabInFocus = setInterval(() => {
+			this.canvas.createSnowflake(this.speedValue, this.sizeValue)
+		}, this.amountValue)
+	}
+
+	stopFlakes() {
+		window.clearInterval(this.tabInFocus)
+	}
+
+}
+
+const initialzieInject = new Inject()
 
 class Snowflake {
     constructor(ctx, width, speed, size) {
