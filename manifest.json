@@ -1,22 +1,17 @@
 {
-  "name": "CHANGE THIS : Extension boilerplate",
-  "version": "0.0.1",
+  "name": "Let it snow",
+  "version": "1.0.0",
   "manifest_version": 2,
-  "description": "This extension was created with the awesome extensionizr.com",
-  "homepage_url": "http://extensionizr.com",
+  "description": "Making the internet look a lot like Christmas",
+  "homepage_url": "https://github.com/NorthernTwig/Let-it-snow",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "default_locale": "en",
-  "background": {
-    "page": "src/bg/background.html",
-    "persistent": true
-  },
   "browser_action": {
     "default_icon": "icons/icon19.png",
-    "default_title": "Let it snow - Settings",
+    "default_title": "Let it snow - Options",
     "default_popup": "src/browser_action/browser_action.html"
   },
   "content_scripts": [
