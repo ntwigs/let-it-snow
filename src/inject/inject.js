@@ -1,14 +1,32 @@
 chrome.extension.sendMessage({}, function(response) {
 	var readyStateCheckInterval = setInterval(function() {
-	if (document.readyState === "complete") {
+	if (document.readyState === 'complete') {
 		clearInterval(readyStateCheckInterval);
-		chrome.storage.sync.get("snowToggle", function (obj) {
+		chrome.storage.sync.get('snowToggle', function (obj) {
     		if (obj.snowToggle) {
 				const canvas = new CanvasHandler()
 				canvas.initialize()
-				setInterval(() => {
-					canvas.createSnowflake()
-				}, 250)
+
+				let tabInFocus
+				toggleFocus = true
+
+				function generateFlakes() {
+					tabInFocus = setInterval(() => {
+						canvas.createSnowflake()
+					}, 250)
+				}
+
+				function stopFlakes() {
+					window.clearInterval(tabInFocus)
+				}
+
+				generateFlakes()
+				window.addEventListener('visibilitychange', () => {
+					toggleFocus = toggleFocus ? false : true
+					toggleFocus ? generateFlakes() : stopFlakes()
+				})
+
+
 			}
 		});
 	}
