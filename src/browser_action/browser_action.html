@@ -1,6 +1,28 @@
 <!doctype html>
-<div id="mainPopup">
+<link rel="stylesheet" href="../../css/main.css" />
+<div class="popup">
 	<script src="snowToggle.js"></script>
-	<h1>Let it snow - Settings</h1>
+	<h1 class="header-text">LET IT SNOW</h1>
+	<h5 class="header-text">OPTIONS</h5>
+	<div class="seperator"></div>
+	<div class="container">
+		<div class="input-container">
+			<p>Amount</p>
+			<input class="range-slider range amount" type="range" value="750" min="0" max="1000">
+		</div>
+		<div class="seperator"></div>
+		<div class="input-container">
+			<p>Size</p>
+			<input class="range-slider range size" type="range" value="15" min="0" max="200">
+		</div>
+		<div class="seperator"></div>
+		<div class="input-container">
+			<p>Speed</p>
+			<input class="range-slider range speed" type="range" value="35" min="0" max="400">
+		</div>
+		<div class="seperator"></div>
+	</div>
 	<button class="toggle" type="button" name="button">Toggle Snow</button>
+	<button class="save" type="button" name="button">Save</button>
+	<h5 class="header-text">Changes takes effect after refresh</h5>
 </div>

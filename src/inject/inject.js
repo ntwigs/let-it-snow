@@ -1,7 +1,7 @@
 chrome.extension.sendMessage({}, function(response) {
 	var readyStateCheckInterval = setInterval(function() {
 	if (document.readyState === 'complete') {
-		clearInterval(readyStateCheckInterval);
+		clearInterval(readyStateCheckInterval)
 		chrome.storage.sync.get('snowToggle', function (obj) {
     		if (obj.snowToggle) {
 				const canvas = new CanvasHandler()
@@ -10,38 +10,51 @@ chrome.extension.sendMessage({}, function(response) {
 				let tabInFocus
 				toggleFocus = true
 
-				function generateFlakes() {
-					tabInFocus = setInterval(() => {
-						canvas.createSnowflake()
-					}, 250)
-				}
+				chrome.storage.sync.get('options', function (option) {
 
-				function stopFlakes() {
-					window.clearInterval(tabInFocus)
-				}
+					let amountValue = (1000 - (option.options.amount - 1)) || 250
+					let sizeValue = (option.options.size / 10) || 0.15
+					let speedValue = (option.options.speed / 100) || 0.35
 
-				generateFlakes()
-				window.addEventListener('visibilitychange', () => {
-					toggleFocus = toggleFocus ? false : true
-					toggleFocus ? generateFlakes() : stopFlakes()
+
+					function generateFlakes() {
+						tabInFocus = setInterval(() => {
+							canvas.createSnowflake(speedValue, sizeValue)
+						}, amountValue)
+					}
+
+					function stopFlakes() {
+						window.clearInterval(tabInFocus)
+					}
+
+					generateFlakes()
+					window.addEventListener('visibilitychange', () => {
+						toggleFocus = toggleFocus ? false : true
+						toggleFocus ? generateFlakes() : stopFlakes()
+					})
+
 				})
-
-
 			}
-		});
+		})
 	}
-	}, 10);
+	}, 10)
 })
 
 class Snowflake {
-    constructor(ctx, width) {
+    constructor(ctx, width, speed, size) {
+
+		//Values should be set with value / 100
         this.ctx = ctx
         this.right = Math.random() > 0.5 ? true : false
-        this.size = Math.floor(Math.random() * 4) + 2
+
+		//Set size value here
+        this.size = Math.floor(Math.random() * size) + 2
         this.x = Math.floor(Math.random() * width) + 1
         this.curve = 100
         this.y = -10
-        this.speed = 0.35 + (this.size / 50)
+
+		//Set speed value here
+        this.speed = speed + (this.size / 50)
         this.opacity = (Math.random() * 1) + 0.25
     }
 
@@ -107,8 +120,8 @@ class CanvasHandler {
         }
     }
 
-    createSnowflake() {
-    	this.snowflakes.push(new Snowflake(this.ctx, this.canvas.width))
+    createSnowflake(speed, size) {
+    	this.snowflakes.push(new Snowflake(this.ctx, this.canvas.width, speed, size))
     }
 
     noise(snowflake) {
