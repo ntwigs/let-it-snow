@@ -17,19 +17,13 @@ chrome.extension.sendMessage({}, function(response) {
 
 class Snowflake {
     constructor(ctx, width) {
-        const randomX = Math.floor(Math.random() * width) + 1
-
         this.ctx = ctx
         this.right = Math.random() > 0.5 ? true : false
         this.size = Math.floor(Math.random() * 4) + 2
-        this.x = randomX
+        this.x = Math.floor(Math.random() * width) + 1
         this.curve = 100
         this.y = -10
-        this.origo = randomX
         this.speed = 0.35 + (this.size / 50)
-        // this.weight = Math.random
-        this.xMax = this.x + 200
-        this.xMin = this.x - 200
         this.opacity = (Math.random() * 1) + 0.25
     }
 
@@ -43,7 +37,6 @@ class Snowflake {
 
 class CanvasHandler {
     constructor() {
-        this.snowAmount = 1
         this.snowflakes = []
         this.height = window.innerHeight
         this.width = window.innerWidth
@@ -54,6 +47,7 @@ class CanvasHandler {
     initialize() {
         const body = document.querySelector('body')
         this.ctx = this.createCanvas(body)
+		this.initializeListener()
         this.run()
     }
 
@@ -81,12 +75,11 @@ class CanvasHandler {
     }
 
     clear() {
-        this.ctx.clearRect(0, 0, this.width, this.height)
+        this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
     }
 
     draw() {
         this.clear()
-        // this.createSnowflake()
         return this.update()
     }
 
@@ -97,9 +90,7 @@ class CanvasHandler {
     }
 
     createSnowflake() {
-        // if (Math.random() < this.snowAmount) {
-            this.snowflakes.push(new Snowflake(this.ctx, this.canvas.width))
-        // }
+    	this.snowflakes.push(new Snowflake(this.ctx, this.canvas.width))
     }
 
     noise(snowflake) {
@@ -128,7 +119,3 @@ class CanvasHandler {
         window.requestAnimationFrame(this.run.bind(this))
     }
 }
-
-(function() {
-
-})();
