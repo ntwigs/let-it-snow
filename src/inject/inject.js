@@ -7,10 +7,16 @@ class Inject {
 		this.speedValue = 0.35
 		this.canvas = null
 
+
+
 		chrome.extension.sendMessage({}, response => {
 			const readyStateCheckInterval = setInterval(() => {
 			if (document.readyState === 'complete') {
 				clearInterval(readyStateCheckInterval)
+				chrome.storage.onChanged.addListener(() => {
+					this.stopFlakes()
+					this.setUserValues()
+				})
 				chrome.storage.sync.get('snowToggle', onOff => {
 		    		if (onOff.snowToggle) {
 						this.createCanvas()
@@ -25,7 +31,7 @@ class Inject {
 	setUserValues() {
 		chrome.storage.sync.get('options', option => {
 			if (option) {
-				this.amountValue = (1000 - (option.options.amount - 1))
+				this.amountValue = (1000 - (option.options.amount))
 				this.sizeValue = (option.options.size / 10)
 				this.speedValue = (option.options.speed / 100)
 			}

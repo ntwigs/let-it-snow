@@ -10,6 +10,7 @@ class SnowToggle {
                     this.restoreValues()
                     this.toggle = document.querySelector('.toggle')
                     this.save = document.querySelector('.save')
+                    this.range = document.querySelectorAll('.range')
                     this.addListener()
             	}
         	}, 10)
@@ -18,7 +19,9 @@ class SnowToggle {
 
     addListener() {
         this.toggle.addEventListener('click', this.toggleSnow.bind(this))
-        this.save.addEventListener('click', this.saveOptions.bind(this))
+        for (let i = 0; i < this.range.length; i++) {
+            this.range[i].addEventListener('change', this.saveOptions.bind(this))
+        }
     }
 
     toggleSnow() {
