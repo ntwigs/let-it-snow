@@ -14,19 +14,16 @@ class Inject {
 			const readyStateCheckInterval = setInterval(() => {
 			if (document.readyState === 'complete') {
 				clearInterval(readyStateCheckInterval)
-
-				chrome.storage.onChanged.addListener((s) => {
+				chrome.storage.onChanged.addListener((isToggeling) => {
 					this.stopFlakes()
 					if (this.stop) {
 						this.setUserValues()
 					}
-					if (s.snowToggle) {
+					if (isToggeling.snowToggle) {
 						this.checkIfTurnOffSnow()
 					}
 				})
-
 				this.checkIfTurnOffSnow()
-
 			}
 			}, 10)
 		})
