@@ -14,14 +14,19 @@ class Inject {
 			const readyStateCheckInterval = setInterval(() => {
 			if (document.readyState === 'complete') {
 				clearInterval(readyStateCheckInterval)
-				chrome.storage.onChanged.addListener(() => {
+
+				chrome.storage.onChanged.addListener((s) => {
 					this.stopFlakes()
 					if (this.stop) {
 						this.setUserValues()
 					}
-					this.checkIfTurnOffSnow()
+					if (s.snowToggle) {
+						this.checkIfTurnOffSnow()
+					}
 				})
+
 				this.checkIfTurnOffSnow()
+
 			}
 			}, 10)
 		})
@@ -30,6 +35,7 @@ class Inject {
 	checkIfTurnOffSnow() {
 		chrome.storage.sync.get('snowToggle', onOff => {
 			this.stop = onOff.snowToggle
+
 			if (this.stop) {
 				if (!this.canvas) {
 					this.createCanvas()
@@ -48,11 +54,10 @@ class Inject {
 				this.sizeValue = (option.options.size / 10)
 				this.speedValue = (option.options.speed / 100)
 			}
-			if (this.stop) {
-				console.log('hit');
-				this.correctTabListener()
-			}
+
+			this.correctTabListener()
 		})
+
 	}
 
 	createCanvas() {
@@ -71,9 +76,11 @@ class Inject {
 	}
 
 	generateFlakes() {
-		this.tabInFocus = setInterval(() => {
-			this.canvas.createSnowflake(this.speedValue, this.sizeValue)
-		}, this.amountValue)
+		if (this.stop) {
+			this.tabInFocus = setInterval(() => {
+				this.canvas.createSnowflake(this.speedValue, this.sizeValue)
+			}, this.amountValue)
+		}
 	}
 
 	stopFlakes() {
