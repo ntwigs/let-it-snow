@@ -8,8 +8,6 @@ class Inject {
 		this.canvas = null
 		this.stop = null
 
-
-
 		chrome.extension.sendMessage({}, response => {
 			const readyStateCheckInterval = setInterval(() => {
 			if (document.readyState === 'complete') {
@@ -54,7 +52,6 @@ class Inject {
 
 			this.correctTabListener()
 		})
-
 	}
 
 	createCanvas() {
