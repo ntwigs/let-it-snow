@@ -8,6 +8,8 @@
     width: 350px;
     padding: 10px;
     border: none;
+    display: flex;
+    flex-direction: column;
 }
 
 .input-container {
@@ -32,7 +34,6 @@
 
 p {
     text-align: center;
-    width: 100%;
     margin: 10px;
     color: #01b9db;
 }
@@ -98,4 +99,59 @@ input[type=range]::-webkit-slider-runnable-track {
 
 input[type=range]:focus::-webkit-slider-runnable-track {
     opacity: 0.75
+}
+
+
+.toggle-container {
+  width: 50px;
+  height: 25px;
+  background-color: white;
+  border: 1px solid #01BDDF;
+  border-radius: 2px;
+  padding: 2px;
+  cursor: pointer;
+  transition: all 500ms;
+}
+
+.color {
+   background-color: #01BDDF;
+}
+
+.toggle {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  background-color: #01BDDF;
+  cursor: pointer;
+  border-radius: 2px 15px 15px 2px;
+  transition: all 500ms, opacity 50ms;
+  left: 0%;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.toggle:hover {
+  opacity: 0.85;
+}
+
+.toggle-text {
+  margin: 0;
+}
+
+.move-right {
+  left: Calc(100% - 50%);
+  border-radius: 15px 2px 2px 15px;
+  background-color: white;
+}
+
+.wrong-margin {
+  margin: 0;
+}
+
+.on {
+  width: 35px;
+}
+
+.off {
+  width: 35px;
 }
