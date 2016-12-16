@@ -13,8 +13,17 @@ class SnowToggle {
                     this.save = document.querySelector('.save')
                     this.range = document.querySelectorAll('.range')
                     this.addListener()
+                    this.checkValues()
             	}
         	}, 10)
+        })
+    }
+
+    checkValues() {
+        chrome.storage.sync.get('snowToggle', obj => {
+            if (obj.snowToggle === undefined) {
+                this.toggleSnow()
+            }
         })
     }
 
@@ -28,17 +37,24 @@ class SnowToggle {
     toggleSnow() {
         this.toggle.classList.toggle('move-right')
         this.container.classList.toggle('color')
-
         chrome.storage.sync.get('snowToggle', obj => {
-            const toggle = obj.snowToggle ? false : true
+            let toggle
+
+            if (obj.snowToggle !== undefined) {
+                toggle = obj.snowToggle ? false : true
+            } else {
+                toggle = false
+            }
+
             chrome.storage.sync.set({'snowToggle': toggle}, () => {
                 sendResponse()
             })
+            
         })
     }
 
     saveOptions() {
-        let options = {'amount': this.amount.value, 'size': this.size.value, 'speed': this.speed.value}
+        let options = {'amount': this.amount.value || 50, 'size': this.size.value || 50, 'speed': this.speed.value || 50}
         chrome.storage.sync.set({'options': options}, () => {
             sendResponse()
         })

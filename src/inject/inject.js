@@ -44,12 +44,11 @@ class Inject {
 
 	setUserValues() {
 		chrome.storage.sync.get('options', option => {
-			if (option) {
+			if (option.options !== undefined) {
 				this.amountValue = (1000 - (option.options.amount))
 				this.sizeValue = (option.options.size / 10)
 				this.speedValue = (option.options.speed / 100)
 			}
-
 			this.correctTabListener()
 		})
 	}
