@@ -1,6 +1,8 @@
 # Let it snow ![Let it snow](icons/icon48.png)
 ### A chrome extension for making the internet look a lot like Christmas
 
+Published Version can be found here: [Chrome Web Store](https://chrome.google.com/webstore/detail/let-it-snow/glbcjjncmcgmnjcnijnnakeeccdojipb)
+
 ##### What is this?
 * This is an extension for chrome which creates circles, representing snowflakes on every page you visit.
 * It has easy to use sliders which easily change the size, amount, or speed of the the snowflakes.
