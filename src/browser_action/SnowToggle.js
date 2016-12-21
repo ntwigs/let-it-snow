@@ -7,13 +7,13 @@ class SnowToggle {
                     this.amount = document.querySelector('.amount')
                     this.size = document.querySelector('.size')
                     this.speed = document.querySelector('.speed')
-                    this.restoreValues()
                     this.toggle = document.querySelector('.toggle')
                     this.container = document.querySelector('.toggle-container')
                     this.save = document.querySelector('.save')
                     this.range = document.querySelectorAll('.range')
-                    this.addListener()
                     this.checkValues()
+                    this.addListener()
+                    this.restoreValues()
             	}
         	}, 10)
         })
@@ -22,7 +22,19 @@ class SnowToggle {
     checkValues() {
         chrome.storage.sync.get('snowToggle', obj => {
             if (obj.snowToggle === undefined) {
-                this.toggleSnow()
+                this.toggle.classList.toggle('move-right')
+                chrome.storage.sync.set({'snowToggle': false}, () => {
+                    sendResponse()
+                })
+            }
+        })
+
+        chrome.storage.sync.get('options', optionObject => {
+            if (optionObject.options === undefined) {
+             let options = {'amount': 50, 'size': 50, 'speed': 50}
+            chrome.storage.sync.set({'options': options}, () => {
+                sendResponse()
+            })
             }
         })
     }
@@ -36,7 +48,6 @@ class SnowToggle {
 
     toggleSnow() {
         this.toggle.classList.toggle('move-right')
-        this.container.classList.toggle('color')
         chrome.storage.sync.get('snowToggle', obj => {
             let toggle
 
@@ -68,8 +79,7 @@ class SnowToggle {
 
             chrome.storage.sync.get('snowToggle', obj => {
                 if (!obj.snowToggle) {
-                    this.container.classList.add('color')
-                    this.toggle.classList.add('move-right')
+                    this.toggle.classList.toggle('move-right')
                 }
             })
 
