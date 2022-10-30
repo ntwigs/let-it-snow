@@ -1,0 +1,12 @@
+{
+  "name": "Let-it-snow",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ntwigs/Let-it-snow.git",
+  "author": "ntwigs <oscar.cv.nordquist@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@parcel/config-webextension": "^2.7.0",
+    "parcel": "^2.7.0"
+  }
+}
