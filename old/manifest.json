@@ -16,16 +16,9 @@
   },
   "content_scripts": [
     {
-      "matches": [
-          "http://*/*", "https://*/*"
-      ],
-      "js": [
-        "src/inject/inject.js"
-      ]
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["src/inject/inject.js"]
     }
-],
-"permissions": [
-    "storage",
-    "activeTab"
-]
+  ],
+  "permissions": ["storage", "activeTab"]
 }

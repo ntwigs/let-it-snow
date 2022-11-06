@@ -1,0 +1,11 @@
+.extension-let-it-snow {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  z-index: 99999;
+  width: 100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  pointer-events: none;
+}
