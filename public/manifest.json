@@ -14,6 +14,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
+      "run_at": "document_idle",
       "js": ["../src/snow/index.ts"],
       "css": ["../src/snow/canvas/styles.css"]
     }
