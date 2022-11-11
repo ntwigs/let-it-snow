@@ -1,18 +1,19 @@
 import { FormEvent } from 'react'
 import styled from 'styled-components'
 
-const RANGE_PADDING = 2
+const PADDING = 2
+const PADDING_SPACE = PADDING * 2
 
 type Reverse = {
   isReverse?: boolean
 }
 const Container = styled.div<Reverse>`
-  width: calc(100% - RANGE_PADDING * 2 px);
+  width: calc(100% - ${PADDING_SPACE}px);
   height: ${({ theme }) => theme.getSize(3)}px;
   border-radius: ${({ theme }) => theme.getSize(2)}px;
   background: ${({ theme }) => theme.color.secondary};
   transform: rotateY(${({ isReverse }) => (isReverse ? 180 : 0)}deg);
-  padding: 0 ${RANGE_PADDING}px;
+  padding: 0 ${PADDING}px;
 
   input[type='range'] {
     -webkit-appearance: none;
