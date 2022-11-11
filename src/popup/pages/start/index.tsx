@@ -1,38 +1,32 @@
-import { useMountEffect } from '@react-hookz/web'
-import { useState } from 'react'
-import { AmountSlider } from '../../blocks/amount-slider'
-import { Header } from '../../blocks/header'
-import { SizeSlider } from '../../blocks/size-slider'
-import { SnowToggle } from '../../blocks/snow-toggle'
-import { SpeedSlider } from '../../blocks/speed-slider'
+import { Options } from '../options'
+import { Unsupported } from '../unsupported'
+import { useEffect, useState } from 'react'
+import { IS_SUPPORTED } from '../../../support/globals'
 import { Container } from '../../components/container'
-import { Error } from '../error'
 
-type DefaultData = {
-  amount: number
-  size: number
-  speed: number
-  isActive: boolean
+type Support = {
+  isError: boolean
+  isLoading: boolean
 }
+const useSupport = (): Support => {
+  const [isLoading, setLoading] = useState<boolean>(true)
+  const [isError, setError] = useState<boolean>(false)
 
-const useInitialValues = () => {
-  const [isLoading, setLoading] = useState(true)
-  const [isError, setError] = useState(false)
-  const [initialValues, setInitialValues] = useState<DefaultData>(
-    {} as DefaultData
-  )
-
-  useMountEffect(() => {
-    const getValues = async () => {
+  useEffect(() => {
+    const sendSupportCheck = async () => {
       try {
-        const storedValues = (await chrome.storage.local.get([
-          'amount',
-          'size',
-          'speed',
-          'isActive',
-        ])) as DefaultData
+        const [tabData] = await chrome.tabs.query({
+          active: true,
+          currentWindow: true,
+        })
 
-        setInitialValues(storedValues)
+        const result = await chrome.tabs.sendMessage(tabData.id!, {
+          message: IS_SUPPORTED,
+        })
+
+        if (!result) {
+          setError(true)
+        }
       } catch {
         setError(true)
       } finally {
@@ -40,31 +34,20 @@ const useInitialValues = () => {
       }
     }
 
-    getValues()
-  })
+    sendSupportCheck()
+  }, [])
 
   return {
     isLoading,
     isError,
-    initialValues,
   }
 }
 
-export const Start = (): JSX.Element | null => {
-  const { isError, isLoading, initialValues } = useInitialValues()
+export const Start = () => {
+  const { isLoading, isError } = useSupport()
 
-  if (isLoading) return null
-  if (isError) return <Error />
+  if (isLoading) return <Container />
+  if (isError) return <Unsupported />
 
-  const { amount, isActive, size, speed } = initialValues
-
-  return (
-    <Container>
-      <Header title="LET IT SNOW" />
-      <AmountSlider initial={amount} />
-      <SizeSlider initial={size} />
-      <SpeedSlider initial={speed} />
-      <SnowToggle initial={isActive} />
-    </Container>
-  )
+  return <Options />
 }
