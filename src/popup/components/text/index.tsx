@@ -1,7 +1,4 @@
-import styled, {
-  CSSProperties,
-  DefaultTheme,
-} from 'styled-components'
+import styled, { CSSProperties, DefaultTheme } from 'styled-components'
 
 type Props = {
   size?: keyof DefaultTheme['size']

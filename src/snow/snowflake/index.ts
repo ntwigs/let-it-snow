@@ -24,7 +24,6 @@ export class Snowflake implements Render {
     this.x = this.getX(width)
     this.opacity = this.getOpacity()
     this.isRight = this.getIsRight()
-
   }
 
   setSpeed(speed: number): void {
