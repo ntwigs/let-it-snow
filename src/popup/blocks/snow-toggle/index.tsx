@@ -5,6 +5,7 @@ import { Toggle } from '../../components/toggle'
 import { Text } from '../../components/text'
 import { Section } from '../../components/section'
 import { useDebouncedEffect } from '@react-hookz/web'
+import { storageController } from '../../../storage'
 
 const Row = styled.div`
   display: flex;
@@ -26,7 +27,7 @@ export const SnowToggle = ({ initial }: Props): JSX.Element => {
 
   useDebouncedEffect(
     () => {
-      chrome.storage.local.set({ isActive })
+      storageController.setValue({ isActive })
     },
     [isActive],
     DEBOUNCE_TIME

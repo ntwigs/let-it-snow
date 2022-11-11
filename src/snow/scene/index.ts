@@ -1,16 +1,13 @@
+import { storageController } from '../../storage'
+import { OptionValues } from '../../storage/config'
 import { Render } from '../render'
 import { Snowflake } from '../snowflake'
 import { Timer } from '../timer'
 
-type Options = {
-  speed: number
-  size: number
-}
-
 export class Scene implements Render {
   private snowflakes: Snowflake[] = []
   private context: CanvasRenderingContext2D | null = null
-  private options: Options = {
+  private options: Pick<OptionValues, 'size' | 'speed'> = {
     size: 0,
     speed: 0,
   }
@@ -45,23 +42,27 @@ export class Scene implements Render {
 
   setSettingsListener(): void {
     this.setInitialOptions()
-    chrome.storage.onChanged.addListener(this.setOptions.bind(this))
+    storageController.onChange(this.setOptions.bind(this))
   }
 
-  setInitialOptions(): void {
-    chrome.storage.local.get(
-      ['amount', 'speed', 'size'],
-      ({ amount, speed, size }) => {
-        this.options = {
-          speed,
-          size,
-        }
-        this.timer.setInterval(amount)
-      }
-    )
+  async setInitialOptions(): Promise<void> {
+    const { speed, size, amount } = await storageController.getValues([
+      'amount',
+      'speed',
+      'size',
+    ])
+
+    this.options = {
+      speed,
+      size,
+    }
+
+    this.timer.setInterval(amount)
   }
 
-  setOptions(changes: Record<string, chrome.storage.StorageChange>): void {
+  setOptions(
+    changes: Record<keyof OptionValues, chrome.storage.StorageChange>
+  ): void {
     if ('amount' in changes) {
       const amount = changes.amount.newValue
       this.timer.setInterval(amount)
@@ -78,7 +79,10 @@ export class Scene implements Render {
     }
   }
 
-  updateExistingSnowflakes(type: 'size' | 'speed', value: number) {
+  updateExistingSnowflakes(
+    type: keyof Pick<OptionValues, 'size' | 'speed'>,
+    value: number
+  ) {
     this.snowflakes.forEach((snowflake) => {
       if (type === 'size') {
         snowflake.setSize(value)

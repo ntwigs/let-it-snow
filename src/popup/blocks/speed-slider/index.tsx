@@ -1,6 +1,7 @@
 import { useDebouncedEffect } from '@react-hookz/web'
 import { FormEvent, useCallback, useState } from 'react'
 import styled from 'styled-components'
+import { storageController } from '../../../storage'
 import { Box } from '../../components/box'
 import { Section } from '../../components/section'
 import { Slider } from '../../components/slider'
@@ -28,7 +29,7 @@ export const SpeedSlider = ({ initial }: Props): JSX.Element => {
 
   useDebouncedEffect(
     () => {
-      chrome.storage.local.set({ speed })
+      storageController.setValue({ speed })
     },
     [speed],
     DEBOUNCE_TIME

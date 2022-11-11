@@ -1,3 +1,5 @@
+import { storageController } from '../../storage'
+import { Options } from '../../storage/config'
 import { Render } from '../render'
 import { Scene } from '../scene'
 
@@ -29,18 +31,18 @@ export class Canvas implements Render {
     }
   }
 
-  setSettingsListener(): void {
-    this.setInitialSnowing()
-    chrome.storage.onChanged.addListener(this.setSnowing.bind(this))
+  async setSettingsListener(): Promise<void> {
+    await this.setInitialSnowing()
+    storageController.onChange(this.setSnowing.bind(this))
   }
 
-  setInitialSnowing(): void {
-    chrome.storage.local.get('isActive', ({ isActive }) => {
-      isActive && this.initialize()
-    })
+  async setInitialSnowing(): Promise<void> {
+    await storageController.seed()
+    const { isActive } = await storageController.getValues(['isActive'])
+    isActive && this.initialize()
   }
 
-  setSnowing(changes: Record<string, chrome.storage.StorageChange>): void {
+  setSnowing(changes: Record<Options, chrome.storage.StorageChange>): void {
     if ('isActive' in changes) {
       const isActive = changes.isActive.newValue
       isActive ? this.initialize() : this.remove()
@@ -66,7 +68,7 @@ export class Canvas implements Render {
   }
 
   addCanvasToDom(canvas: HTMLCanvasElement): void {
-    document.body.appendChild(canvas)
+    document.body.insertAdjacentElement('afterend', canvas)
   }
 
   addResizeListener(canvas: HTMLCanvasElement): void {

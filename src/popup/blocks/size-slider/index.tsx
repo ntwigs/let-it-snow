@@ -1,6 +1,7 @@
 import { useDebouncedEffect } from '@react-hookz/web'
 import { FormEvent, useCallback, useState } from 'react'
 import styled from 'styled-components'
+import { storageController } from '../../../storage'
 import { Box } from '../../components/box'
 import { Section } from '../../components/section'
 import { Slider } from '../../components/slider'
@@ -27,7 +28,7 @@ export const SizeSlider = ({ initial }: Props): JSX.Element => {
 
   useDebouncedEffect(
     () => {
-      chrome.storage.local.set({ size })
+      storageController.setValue({ size })
     },
     [size],
     DEBOUNCE_TIME
@@ -40,7 +41,7 @@ export const SizeSlider = ({ initial }: Props): JSX.Element => {
           <Box bottom={1}>
             <Text>Size</Text>
           </Box>
-          <Slider max={8} value={size} min={2} onDrag={onDrag} />
+          <Slider max={10} value={size} min={2} onDrag={onDrag} />
         </Column>
       </Box>
     </Section>
