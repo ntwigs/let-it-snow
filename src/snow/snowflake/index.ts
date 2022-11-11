@@ -27,12 +27,10 @@ export class Snowflake implements Render {
 
   }
 
-  // Between 0.1 and 8
   setSpeed(speed: number): void {
     this.speed = speed
   }
 
-  // Between 2 and 10
   setSize(size: number): void {
     const sizeFloor = size - 0.5
     this.size = Math.random() + sizeFloor
