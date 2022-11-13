@@ -7,22 +7,23 @@
   "prettier": "@goatee/prettier",
   "scripts": {
     "build": "parcel build public/manifest.json",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "analyze": "parcel build public/manifest.json --reporter @parcel/reporter-bundle-analyzer"
   },
   "devDependencies": {
     "@goatee/prettier": "^0.0.4",
     "@parcel/config-webextension": "^2.7.0",
+    "@parcel/reporter-bundle-analyzer": "^2.8.0",
     "@types/chrome": "^0.0.200",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "@types/styled-components": "^5.1.26",
-    "parcel": "^2.7.0",
+    "parcel": "^2.8.0",
     "prettier": "^2.7.1",
     "process": "^0.11.10"
   },
   "dependencies": {
     "@react-hookz/web": "^17.0.0",
-    "framer-motion": "^7.6.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.6"
