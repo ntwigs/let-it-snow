@@ -8,8 +8,8 @@ export class Scene implements Render {
   private snowflakes: Snowflake[] = []
   private context: CanvasRenderingContext2D | null = null
   private options: Pick<OptionValues, 'size' | 'speed'> = {
-    size: config.size.default,
-    speed: config.speed.default,
+    size: config.size.default as number,
+    speed: config.speed.default as number,
   }
   private timer: Timer = new Timer()
 
