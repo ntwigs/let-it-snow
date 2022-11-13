@@ -7,7 +7,6 @@ import { Container } from '../../components/container'
 import { Unsupported } from '../unsupported'
 import { useInitialValues } from './use-initial-values'
 
-
 export const Options = (): JSX.Element | null => {
   const { isError, isLoading, initialValues } = useInitialValues()
 
