@@ -13,31 +13,13 @@ export class Scene implements Render {
   }
   private timer: Timer = new Timer()
 
-  constructor() {
+  constructor(context: CanvasRenderingContext2D) {
+    this.setContext(context)
     this.setSettingsListener()
   }
 
   setContext(context: CanvasRenderingContext2D) {
     this.context = context
-  }
-
-  addSnowflake() {
-    if (!this.context) return
-    const snowflake = new Snowflake(
-      this.context,
-      window.innerWidth,
-      this.options.speed,
-      this.options.size
-    )
-    this.snowflakes.push(snowflake)
-  }
-
-  removeInvisibleSnowflakes(): void {
-    for (let i = 0; i < this.snowflakes.length; i++) {
-      if (this.snowflakes[i].opacity <= 0) {
-        this.snowflakes.splice(i, 1)
-      }
-    }
   }
 
   setSettingsListener(): void {
@@ -102,5 +84,24 @@ export class Scene implements Render {
     }
     this.removeInvisibleSnowflakes()
     this.snowflakes.forEach((snowflake) => snowflake.render(now))
+  }
+
+  addSnowflake() {
+    if (!this.context) return
+    const snowflake = new Snowflake(
+      this.context,
+      window.innerWidth,
+      this.options.speed,
+      this.options.size
+    )
+    this.snowflakes.push(snowflake)
+  }
+
+  removeInvisibleSnowflakes(): void {
+    for (let i = 0; i < this.snowflakes.length; i++) {
+      if (this.snowflakes[i].opacity <= 0) {
+        this.snowflakes.splice(i, 1)
+      }
+    }
   }
 }

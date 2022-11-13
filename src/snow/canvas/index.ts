@@ -78,8 +78,7 @@ export class Canvas implements Render {
 
   getScene(): void {
     if (!this.context) return
-    const scene = new Scene()
-    scene.setContext(this.context)
+    const scene = new Scene(this.context)
     this.scene = scene
   }
 
