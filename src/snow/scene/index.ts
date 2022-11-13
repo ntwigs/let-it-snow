@@ -90,6 +90,7 @@ export class Scene implements Render {
     if (!this.context) return
     const snowflake = new Snowflake(
       this.context,
+      window.innerWidth,
       this.options.speed,
       this.options.size
     )
