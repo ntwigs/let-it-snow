@@ -12,6 +12,24 @@ export class Canvas implements Render {
     this.setSettingsListener()
   }
 
+  async setSettingsListener(): Promise<void> {
+    await this.setInitialSnowing()
+    storageController.onChange(this.setSnowing.bind(this))
+  }
+
+  async setInitialSnowing(): Promise<void> {
+    await storageController.seed()
+    const { isActive } = await storageController.getValues(['isActive'])
+    isActive && this.initialize()
+  }
+
+  setSnowing(changes: Record<Options, chrome.storage.StorageChange>): void {
+    if ('isActive' in changes) {
+      const isActive = changes.isActive.newValue
+      isActive ? this.initialize() : this.remove()
+    }
+  }
+
   initialize(): void {
     const canvas = this.getCanvas()
     this.canvasReference = canvas
@@ -31,40 +49,10 @@ export class Canvas implements Render {
     }
   }
 
-  async setSettingsListener(): Promise<void> {
-    await this.setInitialSnowing()
-    storageController.onChange(this.setSnowing.bind(this))
-  }
-
-  async setInitialSnowing(): Promise<void> {
-    await storageController.seed()
-    const { isActive } = await storageController.getValues(['isActive'])
-    isActive && this.initialize()
-  }
-
-  setSnowing(changes: Record<Options, chrome.storage.StorageChange>): void {
-    if ('isActive' in changes) {
-      const isActive = changes.isActive.newValue
-      isActive ? this.initialize() : this.remove()
-    }
-  }
-
   getCanvas(): HTMLCanvasElement {
     const canvas = document.createElement('canvas')
     canvas.classList.add('extension-let-it-snow')
     return canvas
-  }
-
-  getContext(canvas: HTMLCanvasElement): void {
-    const context = canvas.getContext('2d')
-    this.context = context ? context : null
-  }
-
-  getScene(): void {
-    if (!this.context) return
-    const scene = new Scene()
-    scene.setContext(this.context)
-    this.scene = scene
   }
 
   addCanvasToDom(canvas: HTMLCanvasElement): void {
@@ -83,10 +71,16 @@ export class Canvas implements Render {
     canvas.height = innerHeight
   }
 
-  clear(): void {
-    if (this.context) {
-      this.context.clearRect(0, 0, innerWidth, innerHeight)
-    }
+  getContext(canvas: HTMLCanvasElement): void {
+    const context = canvas.getContext('2d')
+    this.context = context ? context : null
+  }
+
+  getScene(): void {
+    if (!this.context) return
+    const scene = new Scene()
+    scene.setContext(this.context)
+    this.scene = scene
   }
 
   render(now?: DOMHighResTimeStamp): void {
@@ -94,6 +88,12 @@ export class Canvas implements Render {
     if (this.scene) {
       this.scene.render(now)
       requestAnimationFrame(this.render.bind(this))
+    }
+  }
+
+  clear(): void {
+    if (this.context) {
+      this.context.clearRect(0, 0, innerWidth, innerHeight)
     }
   }
 }
