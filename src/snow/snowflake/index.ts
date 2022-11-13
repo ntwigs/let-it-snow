@@ -1,4 +1,5 @@
 import { Render } from '../render'
+import { sizeController } from '../utils/size'
 
 export class Snowflake implements Render {
   context: CanvasRenderingContext2D | null = null
@@ -11,17 +12,12 @@ export class Snowflake implements Render {
   curve: number = 100
   opacity: number = 0
 
-  constructor(
-    context: CanvasRenderingContext2D,
-    width: number,
-    speed: number,
-    size: number
-  ) {
+  constructor(context: CanvasRenderingContext2D, speed: number, size: number) {
     this.context = context
-    this.width = width
+    this.width = sizeController.width
     this.setSpeed(speed)
     this.setSize(size)
-    this.x = this.getX(width)
+    this.x = this.getX(sizeController.width)
     this.opacity = this.getOpacity()
     this.isRight = this.getIsRight()
   }

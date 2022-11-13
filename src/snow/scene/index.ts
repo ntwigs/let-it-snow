@@ -1,5 +1,5 @@
 import { storageController } from '../../storage'
-import { OptionValues } from '../../storage/config'
+import { config, OptionValues } from '../../storage/config'
 import { Render } from '../render'
 import { Snowflake } from '../snowflake'
 import { Timer } from '../timer'
@@ -8,8 +8,8 @@ export class Scene implements Render {
   private snowflakes: Snowflake[] = []
   private context: CanvasRenderingContext2D | null = null
   private options: Pick<OptionValues, 'size' | 'speed'> = {
-    size: 0,
-    speed: 0,
+    size: config.size.default,
+    speed: config.speed.default,
   }
   private timer: Timer = new Timer()
 
@@ -90,7 +90,6 @@ export class Scene implements Render {
     if (!this.context) return
     const snowflake = new Snowflake(
       this.context,
-      window.innerWidth,
       this.options.speed,
       this.options.size
     )

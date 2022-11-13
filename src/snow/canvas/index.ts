@@ -2,6 +2,7 @@ import { storageController } from '../../storage'
 import { Options } from '../../storage/config'
 import { Render } from '../render'
 import { Scene } from '../scene'
+import { sizeController } from '../utils/size'
 
 export class Canvas implements Render {
   private scene: Scene | null = null
@@ -67,8 +68,8 @@ export class Canvas implements Render {
   }
 
   onResize(canvas: HTMLCanvasElement): void {
-    canvas.width = innerWidth
-    canvas.height = innerHeight
+    canvas.width = sizeController.width
+    canvas.height = sizeController.height
   }
 
   getContext(canvas: HTMLCanvasElement): void {
@@ -92,7 +93,7 @@ export class Canvas implements Render {
 
   clear(): void {
     if (this.context) {
-      this.context.clearRect(0, 0, innerWidth, innerHeight)
+      this.context.clearRect(0, 0, sizeController.width, sizeController.height)
     }
   }
 }
