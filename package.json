@@ -11,6 +11,7 @@
     "analyze": "parcel build public/manifest.json --reporter @parcel/reporter-bundle-analyzer"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.2",
     "@goatee/prettier": "^0.0.4",
     "@parcel/config-webextension": "^2.7.0",
     "@parcel/reporter-bundle-analyzer": "^2.8.0",
@@ -18,6 +19,7 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "@types/styled-components": "^5.1.26",
+    "babel-plugin-styled-components": "^2.0.7",
     "parcel": "^2.8.0",
     "prettier": "^2.7.1",
     "process": "^0.11.10"
