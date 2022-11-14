@@ -8,7 +8,7 @@
   "scripts": {
     "build": "parcel build public/manifest.json",
     "format": "prettier --write .",
-    "analyze": "parcel build public/manifest.json --reporter @parcel/reporter-bundle-analyzer"
+    "prod": "parcel build public/manifest.json --no-source-maps"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
