@@ -18,7 +18,7 @@
       "matches": ["<all_urls>"],
       "run_at": "document_idle",
       "js": ["../src/snow/index.ts", "../src/support/index.ts"],
-      "css": ["../src/snow/canvas/styles.css"]
+      "css": ["../src/snow/main/canvas/styles.css"]
     }
   ],
   "permissions": ["storage"]
