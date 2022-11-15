@@ -1,9 +1,9 @@
-import { storageController } from '../../storage'
-import { Options } from '../../storage/config'
-import { Render } from '../render'
+import { storageController } from '../../../storage'
+import type { Options } from '../../../storage/config'
+import type { ICanvas } from '../../interfaces/canvas'
 import { Scene } from '../scene'
 
-export class Canvas implements Render {
+export class Canvas implements ICanvas {
   private scene: Scene | null = null
   private context: CanvasRenderingContext2D | null = null
   private canvasReference: HTMLCanvasElement | null = null
@@ -12,25 +12,27 @@ export class Canvas implements Render {
     this.setSettingsListener()
   }
 
-  async setSettingsListener(): Promise<void> {
+  private async setSettingsListener(): Promise<void> {
     await this.setInitialSnowing()
     storageController.onChange(this.setSnowing.bind(this))
   }
 
-  async setInitialSnowing(): Promise<void> {
+  private async setInitialSnowing(): Promise<void> {
     await storageController.seed()
     const { isActive } = await storageController.getValues(['isActive'])
     isActive && this.initialize()
   }
 
-  setSnowing(changes: Record<Options, chrome.storage.StorageChange>): void {
+  private setSnowing(
+    changes: Record<Options, chrome.storage.StorageChange>
+  ): void {
     if ('isActive' in changes) {
       const isActive = changes.isActive.newValue
       isActive ? this.initialize() : this.remove()
     }
   }
 
-  initialize(): void {
+  private initialize(): void {
     const canvas = this.getCanvas()
     this.canvasReference = canvas
     this.addCanvasToDom(canvas)
@@ -40,7 +42,7 @@ export class Canvas implements Render {
     this.render()
   }
 
-  remove(): void {
+  private remove(): void {
     if (this.canvasReference) {
       this.canvasReference.remove()
       this.canvasReference = null
@@ -49,34 +51,34 @@ export class Canvas implements Render {
     }
   }
 
-  getCanvas(): HTMLCanvasElement {
+  private getCanvas(): HTMLCanvasElement {
     const canvas = document.createElement('canvas')
     canvas.classList.add('extension-let-it-snow')
     return canvas
   }
 
-  addCanvasToDom(canvas: HTMLCanvasElement): void {
+  private addCanvasToDom(canvas: HTMLCanvasElement): void {
     document.body.insertAdjacentElement('afterend', canvas)
   }
 
-  addResizeListener(canvas: HTMLCanvasElement): void {
+  private addResizeListener(canvas: HTMLCanvasElement): void {
     this.onResize(canvas)
     addEventListener('resize', () => {
       this.onResize(canvas)
     })
   }
 
-  onResize(canvas: HTMLCanvasElement): void {
+  private onResize(canvas: HTMLCanvasElement): void {
     canvas.width = innerWidth
     canvas.height = innerHeight
   }
 
-  getContext(canvas: HTMLCanvasElement): void {
+  private getContext(canvas: HTMLCanvasElement): void {
     const context = canvas.getContext('2d')
     this.context = context ? context : null
   }
 
-  getScene(): void {
+  private getScene(): void {
     if (!this.context) return
     const scene = new Scene(this.context)
     this.scene = scene
@@ -90,7 +92,7 @@ export class Canvas implements Render {
     }
   }
 
-  clear(): void {
+  private clear(): void {
     if (this.context) {
       this.context.clearRect(0, 0, innerWidth, innerHeight)
     }

@@ -1,10 +1,10 @@
-import { storageController } from '../../storage'
-import { config, OptionValues } from '../../storage/config'
-import { Render } from '../render'
+import { storageController } from '../../../storage'
+import { config, type OptionValues } from '../../../storage/config'
 import { Snowflake } from '../snowflake'
-import { Timer } from '../timer'
+import { Timer } from '../../timer'
+import type { IScene } from '../../interfaces/scene'
 
-export class Scene implements Render {
+export class Scene implements IScene {
   private snowflakes: Snowflake[] = []
   private context: CanvasRenderingContext2D | null = null
   private options: Pick<OptionValues, 'size' | 'speed'> = {
@@ -18,16 +18,16 @@ export class Scene implements Render {
     this.setSettingsListener()
   }
 
-  setContext(context: CanvasRenderingContext2D) {
+  private setContext(context: CanvasRenderingContext2D) {
     this.context = context
   }
 
-  setSettingsListener(): void {
+  private setSettingsListener(): void {
     this.setInitialOptions()
     storageController.onChange(this.setOptions.bind(this))
   }
 
-  async setInitialOptions(): Promise<void> {
+  private async setInitialOptions(): Promise<void> {
     const { speed, size, amount } = await storageController.getValues([
       'amount',
       'speed',
@@ -42,7 +42,7 @@ export class Scene implements Render {
     this.timer.setInterval(amount)
   }
 
-  setOptions(
+  private setOptions(
     changes: Record<keyof OptionValues, chrome.storage.StorageChange>
   ): void {
     if ('amount' in changes) {
@@ -61,7 +61,7 @@ export class Scene implements Render {
     }
   }
 
-  updateExistingSnowflakes(
+  private updateExistingSnowflakes(
     type: keyof Pick<OptionValues, 'size' | 'speed'>,
     value: number
   ) {
@@ -86,7 +86,7 @@ export class Scene implements Render {
     this.snowflakes.forEach((snowflake) => snowflake.render(now))
   }
 
-  addSnowflake() {
+  private addSnowflake() {
     if (!this.context) return
     const snowflake = new Snowflake(
       this.context,
@@ -97,7 +97,7 @@ export class Scene implements Render {
     this.snowflakes.push(snowflake)
   }
 
-  removeInvisibleSnowflakes(): void {
+  private removeInvisibleSnowflakes(): void {
     for (let i = 0; i < this.snowflakes.length; i++) {
       if (this.snowflakes[i].opacity <= 0) {
         this.snowflakes.splice(i, 1)
