@@ -1,4 +1,3 @@
-
 <!-- ![marquee](https://user-images.githubusercontent.com/14088342/145066340-c1f5ff26-3a9d-483c-a333-143d9c620650.png) -->
 
 <p align="center">
@@ -32,24 +31,27 @@ Let it snow is configurable. You can change the amount of snow flowing down the 
 ## Features ✔️
 
 So - what does it really do?
-* Takes a shitty site and makes it amazing. 🎄
-* Makes your favorite site even better! 🎿
-* It makes it snow in the browser. ❄️
-* Makes listening to Mariah Carey and Bing Crosby a lot more immersive. 🎶
 
+- Takes a shitty site and makes it amazing. 🎄
+- Makes your favorite site even better! 🎿
+- It makes it snow in the browser. ❄️
+- Makes listening to Mariah Carey and Bing Crosby a lot more immersive. 🎶
 
 What are you waiting for? Get into that Christmas spirit and get [Let it snow](https://chrome.google.com/webstore/detail/let-it-snow/glbcjjncmcgmnjcnijnnakeeccdojipb)!
 
 ## FAQ
 
 ### I can't see any snow - what's happening!?
+
 You might be visiting a site that is not supported - such as the **Chrome extension store**. It could also be that the site you're visiting is white.. and you know.. snow is white.
 
 ### Why does the extension say "Too warm"?
-Well.. the site you're visiting might not support extensions - such as the **Chrome extension store**. It might also be that you need to reload the page you're currently visiting. 
+
+Well.. the site you're visiting might not support extensions - such as the **Chrome extension store**. It might also be that you need to reload the page you're currently visiting.
 
 ### How do I access the Let it snow dropdown?
-At the top right of your browser - you should see a blue little icon (that's the Let it snow icon), click that and it should show. If the icon isn't showing, there should be a "puzzle button", click that and *pin* the Let it snow icon. Now it should always be available at the top of your browser.
+
+At the top right of your browser - you should see a blue little icon (that's the Let it snow icon), click that and it should show. If the icon isn't showing, there should be a "puzzle button", click that and _pin_ the Let it snow icon. Now it should always be available at the top of your browser.
 
 <br>
 
