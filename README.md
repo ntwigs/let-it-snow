@@ -19,13 +19,9 @@
 
 Have you ever had a Christmas without any snow? Maybe you're one of those cellar dwellers that never leave your basement? Then this is the extension for you! Getting into the Christmas spirit without ever even looking out. Let it snow takes all of those shitty websites you're visiting - and makes them amazing with the help of snow.
 
-The snowflakes smoothly travel downwards - as well as follow curves for side movement, which makes it extremely - Christmassy.
-
 ## How do I use Let it snow? ❄️
 
 It's super easy to get going with Let it snow. Just download the extension [here](https://chrome.google.com/webstore/detail/let-it-snow/glbcjjncmcgmnjcnijnnakeeccdojipb) and you should be good to go. The next site you visit will get better than it was before - because now it's snowing.
-
-
 
 ## Show me the beauty 💅
 
@@ -39,6 +35,7 @@ So - what does it really do?
 * Takes a shitty site and makes it amazing. 🎄
 * Makes your favorite site even better! 🎿
 * It makes it snow in the browser. ❄️
+* Makes listening to Mariah Carey and Bing Crosby a lot more immersive. 🎶
 
 
 What are you waiting for? Get into that Christmas spirit and get [Let it snow](https://chrome.google.com/webstore/detail/let-it-snow/glbcjjncmcgmnjcnijnnakeeccdojipb)!
