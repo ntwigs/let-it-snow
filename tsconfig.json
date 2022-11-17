@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "esnext",
+    "target": "ES2015",
+    "module": "ESNext",
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
