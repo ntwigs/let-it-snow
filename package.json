@@ -13,7 +13,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.2",
     "@goatee/prettier": "^0.0.4",
-    "@parcel/config-webextension": "^2.7.0",
+    "@parcel/config-webextension": "^2.8.0",
     "@parcel/reporter-bundle-analyzer": "^2.8.0",
     "@types/chrome": "^0.0.200",
     "@types/react": "^18.0.25",
@@ -25,10 +25,12 @@
     "process": "^0.11.10"
   },
   "dependencies": {
+    "@parcel/core": "2.8.0",
     "@react-hookz/web": "^17.0.0",
-    "framer-motion": "^7.6.7",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "styled-components": "^5.3.6"
+    "framer-motion": "7.6.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-is": "^18.2.0",
+    "styled-components": "5.3.6"
   }
 }
