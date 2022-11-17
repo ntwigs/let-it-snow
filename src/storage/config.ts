@@ -28,12 +28,12 @@ export const config: Config = {
   size: {
     min: 2,
     max: 10,
-    default: 2,
+    default: 3,
   },
   speed: {
     min: 0.1,
     max: 8,
-    default: 0.13,
+    default: 0.65,
   },
   isActive: {
     default: true,
