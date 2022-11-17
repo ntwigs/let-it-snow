@@ -53,6 +53,21 @@ Well.. the site you're visiting might not support extensions - such as the **Chr
 
 At the top right of your browser - you should see a blue little icon (that's the Let it snow icon), click that and it should show. If the icon isn't showing, there should be a "puzzle button", click that and _pin_ the Let it snow icon. Now it should always be available at the top of your browser.
 
+### How do I make this build locally?
+
+It should ™️ be fairly straight forward to make this build locally.
+
+1. Clone the repo to somewhere where you can find it.
+2. Go to the `Let it snow` directory and run Yarn (I've used Yarn, but it could also work with NPM, no guarantees).
+3. Wait for the packages to get installed.
+4. If you're going to be testing - run `yarn build` and you'll get sourcemaps.
+5. If you're going to create a production build - omit the sourcemaps with `yarn prod`.
+6. Go to the extension manager in Chrome and activate Developer mode.
+7. Press the big ol' `Load unpacked extension` and select the newly created `dist` folder in the `Let it snow` directory.
+8. That should be it! If you're experiencing any issues or bugs - please open an issue.
+
+Merry Christmas - and why the heck not - a happy new year 🎄🎅
+
 <br>
 
  <div align="center">
