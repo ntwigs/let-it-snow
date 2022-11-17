@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "Let it snow",
   "description": "Making the internet look a lot like Christmas",
-  "homepage_url": "https://github.com/NorthernTwig/let-it-snow",
-  "version": "0.2.1",
+  "homepage_url": "https://github.com/ntwigs/let-it-snow",
+  "version": "0.2.2",
   "icons": {
     "16": "./icons/icon16.png",
     "19": "./icons/icon19.png",
