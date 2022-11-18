@@ -9,9 +9,15 @@ export const theme = {
     contrast: '#FFFFFF',
   },
   getSize,
+  weight: {
+    black: 900,
+    bold: 700,
+    medium: 500
+  },
   size: {
     large: getSize(3),
     medium: getSize(2),
+    small: getSize(1.75),
   },
   dimensions: {
     width: 235,
