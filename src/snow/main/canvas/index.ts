@@ -1,5 +1,5 @@
 import { storageController } from '../../../storage'
-import type { Options } from '../../../storage/config'
+import { Options } from '../../../storage/config'
 import type { ICanvas } from '../../interfaces/canvas'
 import { Scene } from '../scene'
 
@@ -33,21 +33,23 @@ export class Canvas implements ICanvas {
   }
 
   private initialize(): void {
-    const canvas = this.getCanvas()
-    this.canvasReference = canvas
-    this.addCanvasToDom(canvas)
-    this.addResizeListener(canvas)
-    this.getContext(canvas)
-    this.getScene()
-    this.render()
+    if (!this.canvasReference) {
+      const canvas = this.getCanvas()
+      this.canvasReference = canvas
+      this.addCanvasToDom(canvas)
+      this.addResizeListener(canvas)
+      this.getContext(canvas)
+      this.getScene()
+      this.render()
+    }
+    if (this.scene) {
+      this.scene?.setShouldSnow(true)
+    }
   }
 
   private remove(): void {
-    if (this.canvasReference) {
-      this.canvasReference.remove()
-      this.canvasReference = null
-      this.scene = null
-      this.context = null
+    if (this.scene) {
+      this.scene.setShouldSnow(false)
     }
   }
 
