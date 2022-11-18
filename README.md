@@ -22,12 +22,6 @@ Have you ever had a Christmas without any snow? Maybe you're one of those cellar
 
 It's super easy to get going with Let it snow. Just download the extension [here](https://chrome.google.com/webstore/detail/let-it-snow/glbcjjncmcgmnjcnijnnakeeccdojipb) and you should be good to go. The next site you visit will get better than it was before - because now it's snowing.
 
-## Show me the beauty 💅
-
-Let it snow is configurable. You can change the amount of snow flowing down the screen, the size of the snowflakes, and at what speed they should graciously flow over those pixels.
-
-![let it snow demo](https://user-images.githubusercontent.com/14088342/201927520-dc8b581c-86e2-480c-8faf-acdc85928e31.gif)
-
 ## Features ✔️
 
 So - what does it really do?
@@ -36,6 +30,8 @@ So - what does it really do?
 - Makes your favorite site even better! 🎿
 - It makes it snow in the browser. ❄️
 - Makes listening to Mariah Carey and Bing Crosby a lot more immersive. 🎶
+
+Let it snow is configurable. You can change the amount of snow flowing down the screen, the size of the snowflakes, and at what speed they should graciously flow over those pixels.
 
 What are you waiting for? Get into that Christmas spirit and get [Let it snow](https://chrome.google.com/webstore/detail/let-it-snow/glbcjjncmcgmnjcnijnnakeeccdojipb)!
 
