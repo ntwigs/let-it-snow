@@ -22,6 +22,13 @@ export const Unsupported = (): JSX.Element => {
           <WarningIcon />
         </Box>
         <Text align="center">This site is too warm for snow</Text>
+        <Text align="center" weight="medium">
+          Some sites are unsupported, like the{' '}
+          <Text as="span" weight='bold'>extension store</Text>.
+        </Text>
+        <Text align="center" weight="medium">
+          If that’s not the issue - try reloading the page.
+        </Text>
       </Center>
     </Container>
   )
