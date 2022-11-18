@@ -53,7 +53,8 @@ export class Snowflake implements ISnowflake {
   }
 
   private setOpacity(): void {
-    this.opacity -= 0.002
+    const isCloseToEdge = this.y > window.innerHeight * 0.7
+    this.opacity -= isCloseToEdge ? 0.02 : 0.002
   }
 
   private setNoise(): void {
