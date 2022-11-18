@@ -1,3 +1,5 @@
 import type { IRender } from './render'
 
-export interface IScene extends IRender {}
+export interface IScene extends IRender {
+  setShouldSnow: (shouldSnow: boolean) => void
+}

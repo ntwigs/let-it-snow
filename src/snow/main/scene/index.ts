@@ -11,6 +11,7 @@ export class Scene implements IScene {
     size: config.size.default as number,
     speed: config.speed.default as number,
   }
+  private shouldSnow: boolean | null = null
   private timer: Timer = new Timer()
 
   constructor(context: CanvasRenderingContext2D) {
@@ -76,10 +77,14 @@ export class Scene implements IScene {
     })
   }
 
+  public setShouldSnow(shouldSnow: boolean): void {
+    this.shouldSnow = shouldSnow
+  }
+
   render(now?: DOMHighResTimeStamp): void {
     if (!now) return
 
-    if (this.timer.isTick(now)) {
+    if (this.timer.isTick(now) && this.shouldSnow) {
       this.addSnowflake()
     }
     this.removeInvisibleSnowflakes()
