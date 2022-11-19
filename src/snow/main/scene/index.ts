@@ -88,7 +88,10 @@ export class Scene implements IScene {
       this.addSnowflake()
     }
     this.removeInvisibleSnowflakes()
-    this.snowflakes.forEach((snowflake) => snowflake.render())
+
+    for (let i = 0; i < this.snowflakes.length; i++) {
+      this.snowflakes[i].render()
+    }
   }
 
   private addSnowflake() {
