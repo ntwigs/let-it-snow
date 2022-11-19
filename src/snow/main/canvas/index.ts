@@ -1,9 +1,9 @@
 import { storageController } from '../../../storage'
 import { Options } from '../../../storage/config'
-import type { ICanvas } from '../../interfaces/canvas'
+import type { IRender } from '../../interfaces/render'
 import { Scene } from '../scene'
 
-export class Canvas implements ICanvas {
+export class Canvas implements IRender {
   private scene: Scene | null = null
   private context: CanvasRenderingContext2D | null = null
   private canvasReference: HTMLCanvasElement | null = null

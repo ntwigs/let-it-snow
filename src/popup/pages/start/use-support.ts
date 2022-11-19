@@ -17,7 +17,9 @@ export const useSupport = (): Support => {
           currentWindow: true,
         })
 
-        const result = await chrome.tabs.sendMessage(tabData.id!, {
+        if (!tabData.id) throw new Error()
+
+        const result = await chrome.tabs.sendMessage(tabData.id, {
           message: IS_SUPPORTED,
         })
 

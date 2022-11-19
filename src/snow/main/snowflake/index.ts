@@ -45,7 +45,7 @@ export class Snowflake implements ISnowflake {
     return Math.random() > 0.5
   }
 
-  render(_now?: DOMHighResTimeStamp): void {
+  render(): void {
     this.setOpacity()
     this.setNoise()
     this.setY()

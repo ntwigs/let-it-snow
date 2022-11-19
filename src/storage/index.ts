@@ -11,7 +11,8 @@ const setValue = async (value: Partial<OptionValues>): Promise<void> => {
 }
 
 const onChange = (fn: CallableFunction) => {
-  ;(chrome.storage.onChanged.addListener as CallableFunction)(fn)
+  const listener = chrome.storage.onChanged.addListener as CallableFunction
+  listener(fn)
 }
 
 const seed = async (): Promise<void> => {
