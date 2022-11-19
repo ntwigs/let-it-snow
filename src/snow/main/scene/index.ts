@@ -66,15 +66,11 @@ export class Scene implements IScene {
     type: keyof Pick<OptionValues, 'size' | 'speed'>,
     value: number
   ) {
-    this.snowflakes.forEach((snowflake) => {
-      if (type === 'size') {
-        snowflake.setSize(value)
-      }
-
-      if (type === 'speed') {
-        snowflake.setSpeed(value)
-      }
-    })
+    for (let i = 0; i < this.snowflakes.length; i++) {
+      type === 'size'
+        ? this.snowflakes[i].setSize(value)
+        : this.snowflakes[i].setSpeed(value)
+    }
   }
 
   public setShouldSnow(shouldSnow: boolean): void {
