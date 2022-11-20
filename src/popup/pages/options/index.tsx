@@ -1,4 +1,5 @@
 import { AmountSlider } from '../../blocks/amount-slider'
+import { FollowToggle } from '../../blocks/follow-toggle'
 import { Header } from '../../blocks/header'
 import { SizeSlider } from '../../blocks/size-slider'
 import { SnowToggle } from '../../blocks/snow-toggle'
@@ -13,7 +14,7 @@ export const Options = (): JSX.Element | null => {
   if (isLoading) return <Container />
   if (isError) return <Unsupported />
 
-  const { amount, isActive, size, speed } = initialValues
+  const { amount, isActive, size, speed, isFollowing } = initialValues
 
   return (
     <Container>
@@ -22,6 +23,7 @@ export const Options = (): JSX.Element | null => {
       <SizeSlider initial={size} />
       <SpeedSlider initial={speed} />
       <SnowToggle initial={isActive} />
+      <FollowToggle initial={isFollowing} />
     </Container>
   )
 }

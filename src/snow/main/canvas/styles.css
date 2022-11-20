@@ -9,3 +9,7 @@
   right: 0;
   pointer-events: none;
 }
+
+.extension-let-it-snow-follow {
+  position: fixed;
+}

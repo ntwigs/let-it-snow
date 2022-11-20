@@ -18,27 +18,27 @@ const DEBOUNCE_TIME = 10
 type Props = {
   initial: boolean
 }
-export const SnowToggle = ({ initial }: Props): JSX.Element => {
-  const [isActive, setActive] = useState(initial)
+export const FollowToggle = ({ initial }: Props): JSX.Element => {
+  const [isFollowing, setFollowing] = useState(initial)
 
   const onClick = useCallback(() => {
-    setActive((isActive) => !isActive)
+    setFollowing((isFollowing) => !isFollowing)
   }, [])
 
   useDebouncedEffect(
     () => {
-      storageController.setValue({ isActive })
+      storageController.setValue({ isFollowing })
     },
-    [isActive],
+    [isFollowing],
     DEBOUNCE_TIME
   )
 
   return (
     <Section>
-      <Box x={2} top={4} bottom={1}>
+      <Box x={2} bottom={2}>
         <Row>
-          <Text>{isActive ? `It's snowing` : `No snow`}</Text>
-          <Toggle isActive={isActive} onClick={onClick} />
+          <Text>{isFollowing ? `Following` : ` Not following`}</Text>
+          <Toggle isActive={isFollowing} onClick={onClick} />
         </Row>
       </Box>
     </Section>

@@ -1,10 +1,11 @@
-export type Options = 'speed' | 'amount' | 'size' | 'isActive'
+export type Options = 'speed' | 'amount' | 'size' | 'isActive' | 'isFollowing'
 
 export type OptionValues = {
   speed: number
   amount: number
   size: number
   isActive: boolean
+  isFollowing: boolean
 }
 
 type NumberValue = {
@@ -37,5 +38,8 @@ export const config: Config = {
   },
   isActive: {
     default: true,
+  },
+  isFollowing: {
+    default: false,
   },
 }

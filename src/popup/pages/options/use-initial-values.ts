@@ -18,6 +18,7 @@ export const useInitialValues = () => {
           'size',
           'speed',
           'isActive',
+          'isFollowing'
         ])
 
         setInitialValues(storedValues as OptionValues)

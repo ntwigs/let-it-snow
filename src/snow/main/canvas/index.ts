@@ -1,7 +1,9 @@
 import { storageController } from '../../../storage'
-import { Options } from '../../../storage/config'
+import { config, Options, OptionValues } from '../../../storage/config'
 import type { IRender } from '../../interfaces/render'
 import { Scene } from '../scene'
+
+const FOLLOW_CLASS_NAME = 'extension-let-it-snow-follow'
 
 export class Canvas implements IRender {
   private scene: Scene | null = null
@@ -14,6 +16,7 @@ export class Canvas implements IRender {
 
   private async setSettingsListener(): Promise<void> {
     await this.setInitialSnowing()
+    await this.setFollowingListener()
     storageController.onChange(this.setSnowing.bind(this))
   }
 
@@ -37,6 +40,7 @@ export class Canvas implements IRender {
       const canvas = this.getCanvas()
       this.canvasReference = canvas
       this.addCanvasToDom(canvas)
+      this.setFollowingListener()
       this.addResizeListener(canvas)
       this.getContext(canvas)
       this.getScene()
@@ -57,6 +61,30 @@ export class Canvas implements IRender {
     const canvas = document.createElement('canvas')
     canvas.classList.add('extension-let-it-snow')
     return canvas
+  }
+
+  private async setFollowingListener(): Promise<void> {
+    await this.setInitialFollowing()
+    storageController.onChange(this.setFollowing.bind(this))
+  }
+
+  async setInitialFollowing() {
+    const { isFollowing } = await storageController.getValues(['isFollowing'])
+    if (isFollowing) {
+      this.canvasReference?.classList.add(FOLLOW_CLASS_NAME)
+    }
+  }
+
+  setFollowing(
+    changes: Record<keyof OptionValues, chrome.storage.StorageChange>
+  ) {
+    if (!('isFollowing' in changes)) return
+    const isFollowing = changes.isFollowing.newValue
+    if (isFollowing) {
+      this.canvasReference?.classList.add(FOLLOW_CLASS_NAME)
+    } else {
+      this.canvasReference?.classList.remove(FOLLOW_CLASS_NAME)
+    }
   }
 
   private addCanvasToDom(canvas: HTMLCanvasElement): void {
