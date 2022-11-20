@@ -22,7 +22,7 @@ const seed = async (): Promise<void> => {
       speed: config.speed.default,
       size: config.size.default,
       isActive: config.isActive.default,
-      isFollowing: config.isFollowing.default
+      isFollowing: config.isFollowing.default,
     })
   }
 }
