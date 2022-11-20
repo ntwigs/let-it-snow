@@ -10,6 +10,10 @@
     <img alt='rating badge' src='https://img.shields.io/chrome-web-store/stars/glbcjjncmcgmnjcnijnnakeeccdojipb?color=D5ECC2&style=flat-square' />
     <img alt='version badge' src='https://img.shields.io/badge/version-1.0.0-blue.svg?color=98DDCA&style=flat-square' />
   </p>
+  </br>
+  <p align="center">Let it snow is also at <strong>Product Hunt</strong>!🎄</p>
+  <p align="center">
+  <a href="https://www.producthunt.com/posts/let-it-snow-2?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-let&#0045;it&#0045;snow&#0045;2" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=368022&theme=neutral" alt="Let&#0032;it&#0032;snow - Making&#0032;the&#0032;internet&#0032;look&#0032;a&#0032;lot&#0032;like&#0032;Christmas&#0032;🎅 | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a></p>
 </div>
 
 <hr><br>
