@@ -1,9 +1,9 @@
 import { storageController } from '../../../storage'
-import { config, Options, OptionValues } from '../../../storage/config'
+import { Options, OptionValues } from '../../../storage/config'
 import type { IRender } from '../../interfaces/render'
 import { Scene } from '../scene'
+import { LET_IT_SNOW_CLASS, LET_IT_SNOW_CLASS_FOLLOW } from './selectors'
 
-const FOLLOW_CLASS_NAME = 'extension-let-it-snow-follow'
 
 export class Canvas implements IRender {
   private scene: Scene | null = null
@@ -59,7 +59,7 @@ export class Canvas implements IRender {
 
   private getCanvas(): HTMLCanvasElement {
     const canvas = document.createElement('canvas')
-    canvas.classList.add('extension-let-it-snow')
+    canvas.classList.add(LET_IT_SNOW_CLASS)
     return canvas
   }
 
@@ -71,7 +71,7 @@ export class Canvas implements IRender {
   async setInitialFollowing() {
     const { isFollowing } = await storageController.getValues(['isFollowing'])
     if (isFollowing) {
-      this.canvasReference?.classList.add(FOLLOW_CLASS_NAME)
+      this.canvasReference?.classList.add(LET_IT_SNOW_CLASS_FOLLOW)
     }
   }
 
@@ -81,9 +81,9 @@ export class Canvas implements IRender {
     if (!('isFollowing' in changes)) return
     const isFollowing = changes.isFollowing.newValue
     if (isFollowing) {
-      this.canvasReference?.classList.add(FOLLOW_CLASS_NAME)
+      this.canvasReference?.classList.add(LET_IT_SNOW_CLASS_FOLLOW)
     } else {
-      this.canvasReference?.classList.remove(FOLLOW_CLASS_NAME)
+      this.canvasReference?.classList.remove(LET_IT_SNOW_CLASS_FOLLOW)
     }
   }
 
