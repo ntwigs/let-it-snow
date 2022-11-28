@@ -12,7 +12,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true
+    "isolatedModules": false
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts", "**/*.tsx"]
